@@ -60,24 +60,24 @@ function hideHand1(e)
 
 function attachHand2(id)
 {
-    newh1=3;
+    newh1=true;
+    newdata[id]=true;
     zone[id]='hand2';
     hand2[hand2.length]=id;
     card = get(id);
-    move(card.id,5,window.innerHeight - 5);
+    move(id,5,window.innerHeight - 5);
     bringToTop(id);
     refreshHand2();
 }
 
 function attachHand1(id)
 {
-    newh1=3;
+    newh1=true;
+    newdata[id]=true;
     zone[id]='hand1';
     hand1[hand1.length]=id;
     card = get(id);
-    move(card.id,5,5);
-    card.style.top = 5;
-    card.style.left = 5;
+    move(id,5,5);
     bringToTop(id);
     refreshHand1();
 }
@@ -185,8 +185,6 @@ function drawCard2()
     }
     else
     {
-        newd2=3;
-        newh2=3;
         get('deck2').style.backgroundImage = 'url("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=0&type=card")';
         attachHand2(deck2[0]);
         deck2 = deck2.slice(1,deck2.length);
@@ -203,8 +201,6 @@ function drawCard1()
     }
     else
     {
-        newd1=3;
-        newh1=3;
         get('deck1').style.backgroundImage = 'url("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=0&type=card")';
         attachHand1(deck1[0]);
         deck1 = deck1.slice(1,deck1.length);

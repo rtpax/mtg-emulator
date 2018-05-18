@@ -13,6 +13,8 @@ var zone=[]//["hand1/hand2" or "deck1/deck2" or "grave1/grave2" or "field"]
 var flipped=[];//[bool]
 var angle=[];//[0 or 90 or 180 or 270]
 
+var lock=[];
+
 var newz=false;
 var newd1=false;
 var newd2=false;

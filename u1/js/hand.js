@@ -65,7 +65,7 @@ function attachHand1(id)
     zone[id]='hand1';
     hand1[hand1.length]=id;
     card = get(id);
-    move(card.id,5,window.innerHeight - 5);
+    move(id,5,window.innerHeight - 5);
     bringToTop(id);
     refreshHand1();
 }
@@ -77,9 +77,7 @@ function attachHand2(id)
     zone[id]='hand2';
     hand2[hand2.length]=id;
     card = get(id);
-    move(card.id,5,5);
-    card.style.top = 5;
-    card.style.left = 5;
+    move(id,5,5);
     bringToTop(id);
     refreshHand2();
 }

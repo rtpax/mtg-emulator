@@ -19,7 +19,6 @@ function shuffle(deck)
 function attachDeck2(id)
 {
     if(get(id) == null)return;
-    newd2=3;
     deck2 = [id].concat(deck2);
     get('deck2').style.backgroundImage = 'url("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=0&type=card")';
     hide(id);
@@ -31,7 +30,6 @@ function attachDeck2(id)
 function attachDeck1(id)
 {
     if(get(id) == null)return;
-    newd1=3;
     deck1 = [id].concat(deck1);
     get('deck1').style.backgroundImage = 'url("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=0&type=card")';
     hide(id);

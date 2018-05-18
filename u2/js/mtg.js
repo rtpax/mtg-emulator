@@ -6,19 +6,22 @@ var visibility=[];//["visible" or "hidden"]//not sent, implied from zone
 var xLoc=[];//[float]
 var yLoc=[];//[float]
 var zIndex=[];//[int]
+var locked=[];//data that is recieved and not sent, locks out this user
 var newdata=[];//[int]
 
-var zone=[]//["hand2/2" or "deck2/2" or "grave2/2" or "field"]
+var zone=[]//["hand2/hand1" or "deck2/deck1" or "grave2/grave1" or "field"]
 var flipped=[];//[bool]
 var angle=[];//[0 or 90 or 180 or 270]
 
-var newz=0;
-var newd2=0;
-var newd1=0;
-var newh2=0;
-var newh1=0;
-var newg2=0;
-var newg1=0;
+var lock=[];
+
+var newz=false;
+var newd2=false;
+var newd1=false;
+var newh2=false;
+var newh1=false;
+var newg2=false;
+var newg1=false;
 
 function onWindowResize()
 {
@@ -209,6 +212,35 @@ function createCardWID(wizardsID, id)
         '<img src="../img/tap.png" style="position:absolute;height:10;width:10;left:55;top:2" onclick="tap(this.parentNode.parentNode.id)">'+
         '</div>';
     document.body.appendChild(card);
+    addListener(card);
+
+
+    //bringToTop(inpId);
+    return card;
+}
+
+function attachField(id)
+{
+    var card = get(id);
+    card.parentNode.removeChild(card);
+    document.body.appendChild(card);
+
+    setVisibility(id,'visible');
+    zone[id] = 'field';
+    newdata[id] = true;
+
+
+    card.setAttribute("class","card");
+    card.setAttribute("data-draggable","true");
+    card.setAttribute("onmouseover","setBigImg(this)");
+    card.style='background-image:url("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+multiverseid[id]+'&type=card");transform:rotate(0deg);';
+    card.innerHTML = '<button class="counter" style = "height:10%;color:white;top:0;" onclick="addCounter(this)">Add counter</button>';
+    card.innerHTML += '<div class="taps" style="height:10%;bottom:0;top:90%">'+
+        '<img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=0&type=card" style="position:absolute;height:10;width:7;left:10;top:2" onclick="flip(this.parentNode.parentNode.id)">'+
+        '<img src="../img/untap.png" style="position:absolute;height:10;width:10;left:35;top:2" onclick="untap(this.parentNode.parentNode.id)">'+
+        '<img src="../img/tap.png" style="position:absolute;height:10;width:10;left:55;top:2" onclick="tap(this.parentNode.parentNode.id)">'+
+        '</div>';
+
     addListener(card);
 
 

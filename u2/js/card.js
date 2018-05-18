@@ -33,7 +33,7 @@ function applyLoc()
 function applyAngle()
 {
     for(var i=0;i<pageid.length;i++)
-        get(pageid[i]).style.transform = 'rotate('+((parseInt(angle[pageid[i]]) + 180)%360)+'deg)';
+        get(pageid[i]).style.transform = 'rotate('+(angle[pageid[i]]+180)+'deg)';
 }
 
 //#apply one
@@ -57,7 +57,7 @@ function applyOneFlip(id)
 
 function applyOneAngle(id)
 {
-    get(id).style.transform = 'rotate('+((parseInt(angle[id]) + 180)%360)+'deg)';
+    get(id).style.transform = 'rotate('+(angle[id]+180)+'deg)';
 }
 
 //#setters
@@ -69,7 +69,6 @@ function show(id)
 
 function hide(id)
 {
-    newdata[id]=3;
     visibility[id]='hidden';
     applyOneVisibility(id);
 }
@@ -77,7 +76,6 @@ function hide(id)
 function bringToTop(targetId)
 {
     var greatest = 0;
-    newz = 3;
 
     for(var i=0;i<pageid.length;i++)
     {
@@ -104,7 +102,7 @@ function bringToTop(targetId)
 
 function move(id, x, y)
 {
-    newdata[id]=3;
+    newdata[id]=true;
     xLoc[id] = x/(window.innerWidth);
     yLoc[id] = y/(window.innerHeight);
 }
@@ -121,14 +119,14 @@ function yPos(id)
 
 function flip(id)
 {
-    newdata[id]=3;
+    newdata[id]=true;
     flipped[id]=!flipped[id];
     applyOneFlip(id);
 }
 
 function untap(id)
 {
-    newdata[id]=3;
+    newdata[id]=true;
     angle[id] += 270;
     angle[id] %= 360;
     applyOneAngle(id);
@@ -136,7 +134,7 @@ function untap(id)
 
 function tap(id)
 {
-    newdata[id]=3;
+    newdata[id]=true;
     angle[id] += 90;
     angle[id] %= 360;
     applyOneAngle(id);
@@ -186,4 +184,25 @@ function removeCounter(inputNode)
     }
 }
 
-
+function setZone(id,z)
+{
+    switch(z)
+    {
+    case 'field':
+        attachField(id);
+    case 'hand2':
+        attachHand2(id);
+    case 'hand1':
+        attachHand1(id);
+    case 'deck2':
+        attachDeck2(id);
+    case 'deck1':
+        attachDeck1(id);
+    case 'grave2':
+        attachGrave2(id);
+    case 'grave1':
+        attachGrave1(id);
+    default:
+        throw ('Zone Error: '+z+' not a zone');
+    }
+}
