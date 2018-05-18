@@ -1,3 +1,22 @@
+var pageid=[];
+idcounter = 0;//TODO: set value with php script from file, load every time it updates
+//all lower arrays indexed by pageid rather than standard indices
+//if loop needed, for(...)zIndex[pageid[n]];
+//pageid = ['card1','card2','card3',....'cardn'];
+var multiverseid=[];
+var xLoc=[];//in % of width to preserve across different browser sizes (prevent drift by never converting back except to drag)
+var yLoc=[];//----^
+var angle=[];//0 - 90 - 180 - 270 (flipped 180 across u1/u2)
+var faceUp=[];//boolean true or false;
+var zIndex=[];
+var counterTexts=[];//array of arrays, last in line when formatted to allow variable length
+var zone=[];//zone is a string containing "graveyard", "deck", "hand", "battlefield", or "undefined"
+            //note that exiled is intentionally not included as it's unnecessary -- just "battlefield"
+//NOTE: all numerical values are NOT string representations above
+
+
+
+
 var deck1 = [48438,12345,2282,1234,125,6536,2345,423453];
 var deck2 = [];
 
@@ -12,6 +31,21 @@ function shuffle(deck)
         deck.splice(index,1);
     }
     return ret;
+}
+
+//fragile, handle with care
+function bringToTop(targetId)
+{
+    var basez = zIndex[targetId];
+    var greatest = 0;
+    for(var n=0;n<pageid.length;n++)
+    {
+        if(pageid[n]==targetId)continue;
+        if(zIndex[pageid[n]]>basez)
+            zIndex[pageid[n]]--;
+        if(zIndex[pageid[n]]>greatest)
+            greatest = zIndex[pageid[n]];
+    }
 }
 
 
@@ -127,11 +161,19 @@ function createCard(wizardsID)
     addListener(card);
     card.style.bottom='5';
 
-
     if(deck1.length == 1)
     {
         document.getElementById("deck").setAttribute("src","./xback.jpg");
         document.getElementById("deck").setAttribute("onclick","");
     }
 
+}
+
+var xhr = new XMLHttpRequest();
+
+function senddata(input)
+{
+  xhr.open("post","./u1.php", true);
+  xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  xhr.send("data="+encodeURIComponent(input));
 }

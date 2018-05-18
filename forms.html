@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var xhr = new XMLHttpRequest();
+
+var numCards;
+var xLoc=[];
+var yLoc=[];
+var pageid=[];
+var multiverseid=[];
+var numCounters=[];
+var counterTexts=[];
+var angle=[];
+var faceUp=[];
+var zIndex=[];
+
+
+function senddata(input)
+{
+  xhr.open("post","./forms.php", true);
+  xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  xhr.send("data="+encodeURIComponent(input));
+}
+</script>
+</head>
+<body>
+<textarea id="text">enter what you want it to be saved as</textarea>
+<button onclick='senddata(document.getElementById("text").value)'>Let's go, Slobro!</button>
+<form action='forms.php' method='post'>
+    <input type='text' name='data'></input>
+    <input type='submit'></input>
+</form>
+</body>
+</html>
