@@ -1,13 +1,16 @@
 <?php
+$log = '';
+
 
 function changelist(&$a,$_a,$_u,$_t)
 {
-    if($a[0] == $_u || $_t - $a[1])
+    if($a[0] == $_u || $_t - $a[1] > 5)
     {
+        $a = array();
         for($i=2;$i<count($_a);$i++)
             $a[$i] = $_a[$i];
-        for($i=count($_a);$i<count($a);$i++)
-            unset($a[$i]);
+        //for($i=count($_a);$i<count($a);$i++)
+        //    unset($a[$i]);
     }
 }
 
@@ -51,19 +54,23 @@ function writestrs($filenames, $strs)
 
 function setzone(&$zone, $haystack, $needles, $str)
 {
+    global $log;
+    $log .= "--";
     for($i=0;$i<count($needles);$i++)
     {
         $loc = array_search($needles[$i],$haystack);
         if($loc !== FALSE)
             $zone[$loc] = $str;
+        $log .= $zone[$loc] . ".";
     }
+
 }
 
 //return data
 
 if($_POST['type'] != "load")
 {
-    $log = '';
+
 
 
 

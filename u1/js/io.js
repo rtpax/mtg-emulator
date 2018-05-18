@@ -70,7 +70,7 @@ xhr.onreadystatechange = function(e)
             //console.log(rt[i]);
         }
 
-        //console.log(rt[8]);
+        console.log(rt[8]);
 
         var type = rt[7];
 
@@ -118,7 +118,7 @@ xhr.onreadystatechange = function(e)
 
                 if(cl[i][8] == 'u2' || type == 'init')
                 {
-                    visibility[cl[i][0]] = (cl[i][2] == 'deck1' || cl[i][2] == 'deck2' || cl[i][2] == 'grave1' || cl[i][2] == 'grave2')?'hidden':'visible';
+                    visibility[cl[i][0]] = (cl[i][2] == 'field')?'visible':'hidden';
                     zone[cl[i][0]] = cl[i][2];
                     //zIndex[cl[i][0]] = cl[i][7];
                     xLoc[cl[i][0]] = parseFloat(cl[i][3]);
