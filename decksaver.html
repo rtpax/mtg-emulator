@@ -1,0 +1,35 @@
+<script>
+function render(inp)
+{
+    var data = inp.split('\n');
+    var display = document.getElementById('display');
+    display.innerHTML='';
+    for(var n=0;n<data.length;n++)
+    {
+        display.innerHTML += '<img src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid='+data[n]+'&type=card">';
+    }
+
+}
+window.onload=function(){
+    var decklist=document.getElementById('decklist');
+    decklist.value = '';
+    var addto=0;
+    var n;
+    for(var n=1;n<100;n++)
+    {
+        decklist.value += (addto+n).toString() + '\n';
+    }
+    decklist.value += (addto+n).toString();
+}
+</script>
+
+<html>
+<head></head>
+<body>
+    <!--<textarea cols="7" rows="1" id="param"></textarea><button onclick = ''-->
+    <textarea cols="7" rows="10" id="decklist"></textarea><br>
+    <button onclick='render(document.getElementById("decklist").value)'>Render</button>
+    <div id="display"></div>
+
+</body>
+</html>
