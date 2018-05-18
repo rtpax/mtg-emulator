@@ -1,13 +1,13 @@
 *
 {
-   font-size: 9;
+    font-size: 9;
 
-   /*the extras are unnecessary for chrome*/
-   -moz-user-select: none;
-   -khtml-user-select: none;
-   -webkit-user-select: none;
-   -ms-user-select: none;
-   user-select: none;
+    /*the extras are unnecessary for chrome*/
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .card{
@@ -79,5 +79,18 @@
   background: rgba(96,0,0,.9);
   box-sizing:border-box;
   border:2px solid rgba(128,64,64,.4);
+}
+
+.interface{
+  position:absolute;
+  top:30%;
+  left:30%;
+  width:40%;
+  height:40%;
+  background-color: #ffffff;
+  border:3px solid #808080;
+  padding:0px;
+  visibility:hidden;
+  z-index:3000;
 }
 

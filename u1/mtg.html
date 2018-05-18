@@ -1,0 +1,83 @@
+<html>
+<head>
+<link rel="shortcut icon" type="image/x-icon" href="http://magic.wizards.com/sites/all/themes/wiz_mtg/icons/favicon.ico">
+<link rel="stylesheet" href="../mtg.css"/>
+<script src='js/methods.js'></script>
+<script src='js/mtg.js'></script>
+<script src='js/hand.js'></script>
+<script src='js/card.js'></script>
+<script src='js/deck.js'></script>
+<script src='js/graveyard.js'></script>
+<script src='js/io.js'></script>
+</head>
+<body style="overflow:hidden">
+
+
+
+<div id="hand1spoiler" style="position:absolute; bottom:0px; right:215px; background:#b0b0b0; width:100%; height:10px; padding:0; box-sizing:border-box; overflow:hidden;" onmouseover="showHand1()"></div>
+
+<div id="hand1" style="position:absolute; bottom:0px; right:215px; background:#ffffff; width:100%; height:150px; padding: 0; box-sizing:border-box; overflow:hidden; border:1px solid #808080; visibility: hidden; z-index:1000" onmouseleave="hideHand1(event)"></div>
+
+<div id="hand2spoiler" style="position:absolute; top:0px; right:215px; background:#b0b0b0; width:100%; height:10px; padding:0; box-sizing:border-box; overflow:hidden;" onmouseover="showHand2()"></div>
+
+<div id="hand2" style="position:absolute; top:0px; right:215px; background:#ffffff; width:100%; height:150px; padding: 0; box-sizing:border-box; overflow:hidden; border:1px solid #808080; visibility: hidden; z-index:1000" onmouseleave="hideHand2(event)"></div>
+
+
+<div style="position:absolute; bottom:0px; right:0px; border:1px solid #808080; width:215px; height:100%; padding:0; box-sizing:border-box; overflow:hidden;">
+    <div class='card' id="deck2" style='top:0%; left:0%; background-color:#e0e0e0; background-image:url("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=0&type=card")' onclick='deckClick2(event);'>
+        <button class="counter" style = "height:10%;color:white;top:0;" onclick="openDeck2Interface()">Open Interface</button>
+    </div>
+    <div class='card' id="grave2" style='top:0%;right:0%;background-color:#e0e0e0; background-image:url("../img/skull.png");transfrom:rotate(180deg)' onclick='openGrave2Interface();' onmouseover='setBigImg(this)'>
+
+    </div>
+    <img class='bigCard' src="http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=0&type=card" id="bigImg" style='top:25%;left:0%'>
+    <div class='card' id="deck1" style='bottom:0%;left:0%;background-color:#e0e0e0; background-image:url("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=0&type=card")' onclick='deckClick1(event);'>
+        <button class="counter" style = "height:10%;color:white;top:0;" onclick="openDeck1Interface()">Open Interface</button>
+    </div>
+    <div class='card' id="grave1" style='bottom:0%;right:0%;background-color:#e0e0e0; background-image:url("../img/skull.png")' onclick='openGrave1Interface();' onmouseover='setBigImg(this)'>
+
+    </div>
+</div>
+
+<div id="deck1Interface" class="interface">
+    <b><div style="position:absolute;width:100%;text-align:center;vertical-align:middle;font-size:20;top:10px">Deck 1</div></b>
+    <button style="position:absolute;width:20%;left:10%;top:20%;height:60%" onclick="deck1=shuffle(deck1);">shuffle</button>
+    <button style="position:absolute;width:20%;left:40%;top:20%;height:60%" onclick="reveal2()">reveal top</button>
+    <button style="position:absolute;width:20%;left:70%;top:20%;height:60%" onclick="openSearchDeck1Interface()">search</button>
+    <button style="position:absolute;width:20px;right:0%;top:0%;height:20px;background-color:#e02020" onclick="closeDeck1Interface()"></button>
+</div>
+
+<div id="deck2Interface" class="interface">
+    <b><div style="position:absolute;width:100%;text-align:center;vertical-align:middle;font-size:20;top:10px">Deck 2</div></b>
+    <button style="position:absolute;width:20%;left:10%;top:20%;height:60%" onclick="deck2=shuffle(deck2);">shuffle</button>
+    <button style="position:absolute;width:20%;left:40%;top:20%;height:60%" onclick="reveal2()">reveal top</button>
+    <button style="position:absolute;width:20%;left:70%;top:20%;height:60%" onclick="openSearchDeck2Interface()">search</button>
+    <button style="position:absolute;width:20px;right:0%;top:0%;height:20px;background-color:#e02020" onclick="closeDeck2Interface()"></button>
+</div>
+
+<div id="searchDeck1Interface" class="interface">
+    <b><div style="position:absolute;width:100%;text-align:center;vertical-align:middle;font-size:20;top:10px">Deck 1</div></b>
+    <div id="d1window" style="position:absolute;width:100%;top:30px;bottom:0px;overflow-y:scroll;"></div>
+    <button style="position:absolute;width:20px;right:0%;top:0%;height:20px;background-color:#e02020" onclick="closeSearchDeck1Interface()"></button>
+</div>
+
+<div id="searchDeck2Interface" class="interface">
+    <b><div style="position:absolute;width:100%;text-align:center;vertical-align:middle;font-size:20;top:10px">Deck 2</div></b>
+    <div id="d2window" style="position:absolute;width:100%;top:30px;bottom:0px;overflow-y:scroll;"></div>
+    <button style="position:absolute;width:20px;right:0%;top:0%;height:20px;background-color:#e02020" onclick="closeSearchDeck2Interface()"></button>
+</div>
+
+<div id="grave1Interface" class="interface">
+    <b><div style="position:absolute;width:100%;text-align:center;vertical-align:middle;font-size:20;top:10px">Grave 1</div></b>
+    <div id="g1window" style="position:absolute;width:100%;top:30px;bottom:0px;overflow-y:scroll;"></div>
+    <button style="position:absolute;width:20px;right:0%;top:0%;height:20px;background-color:#e02020" onclick="closeGrave1Interface()"></button>
+</div>
+
+<div id="grave2Interface" class="interface">
+    <b><div style="position:absolute;width:100%;text-align:center;vertical-align:middle;font-size:20;top:10px">Grave 2</div></b>
+    <div id="g2window" style="position:absolute;width:100%;top:30px;bottom:0px;overflow-y:scroll;"></div>
+    <button style="position:absolute;width:20px;right:0%;top:0%;height:20px;background-color:#e02020" onclick="closeGrave2Interface()"></button>
+</div>
+
+</body>
+</html>

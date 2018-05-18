@@ -60,28 +60,33 @@ function hideHand2(e)
 
 function attachHand1(id)
 {
+    newh2=true;
+    newdata[id]=true;
     zone[id]='hand1';
     hand1[hand1.length]=id;
     card = get(id);
     move(card.id,5,window.innerHeight - 5);
-    //card.style.top = window.innerHeight - 5;
-    //card.style.left = 5;
+    bringToTop(id);
     refreshHand1();
 }
 
 function attachHand2(id)
 {
+    newh2=true;
+    newdata[id]=true;
     zone[id]='hand2';
     hand2[hand2.length]=id;
     card = get(id);
     move(card.id,5,5);
-    //card.style.top = 5;
-    //card.style.left = 5;
+    card.style.top = 5;
+    card.style.left = 5;
+    bringToTop(id);
     refreshHand2();
 }
 
 function detachHand1(id)
 {
+    newh1=3;
     zone[id]='field';
     hand1.splice(hand1.indexOf(id),1);
     show(id);
@@ -90,6 +95,7 @@ function detachHand1(id)
 
 function detachHand2(id)
 {
+    newh2=3;
     zone[id]='field';
     hand2.splice(hand2.indexOf(id),1);
     show(id);
@@ -111,19 +117,20 @@ function refreshHand1()
         }
     }
 
+    var spacing = min((window.innerWidth - 215 - 100 - 5)/(hand1.length - 1), 110);
     for(var i=0;i<hand1.length;i++)
     {
         card = get(hand1[i]);
-        if(card.offsetTop < div.offsetTop || (card.offsetLeft + card.offsetWidth) > (window.innerWidth-215))
+        if(yPos(card.id) < div.offsetTop || (xPos(card.id) + card.offsetWidth) > (window.innerWidth-215))
         {
             detachHand1(hand1[i]);
             i--;
             continue;
         }
 
-        zIndex[card.id]=i;
+        zIndex[card.id]=i + 1000;
         visibility[card.id]=div.style.visibility;
-        move(card.id, 5 + (window.innerWidth - 215 - 100 - 5)/(hand1.length - 1)*i, window.innerHeight - 5 - card.offsetHeight);
+        move(card.id, 5 + spacing*i, window.innerHeight - 5 - card.offsetHeight);
         //card.style.top = window.innerHeight - 5 - card.offsetHeight;
         //card.style.left = 5 + (window.innerWidth - 215 - 100 - 5)/(hand1.length - 1)*i;
     }
@@ -137,6 +144,8 @@ function refreshHand2()
 {
     var card;
     var div = get("hand2");
+
+
     for(var i=hand2.length-1;i>=0;i--)
     {
         if(hand2.indexOf(hand2[i])!=i)
@@ -146,20 +155,21 @@ function refreshHand2()
         }
     }
 
+    var spacing = min((window.innerWidth - 215 - 100 - 5)/(hand2.length - 1), 110);
     for(var i=0;i<hand2.length;i++)
     {
         card = get(hand2[i]);
-        if(card.offsetTop + card.offsetHeight > (div.offsetHeight + div.offsetTop) || (card.offsetLeft + card.offsetWidth) > window.innerWidth-215)
+        if(yPos(card.id) + card.offsetHeight > (div.offsetHeight + div.offsetTop) || (xPos(card.id) + card.offsetWidth) > window.innerWidth-215)
         {
             detachHand2(hand2[i]);
             i--;
             continue;
         }
 
-        zIndex[card.id]=i;
+        zIndex[card.id]=1000+i;
         visibility[card.id]=div.style.visibility;
 
-        move(card.id,5 + (window.innerWidth - 215 - 100 - 5)/(hand1.length - 1)*i,5)
+        move(card.id,5 + spacing*i,5)
         //card.style.top = 5;
         //card.style.left = 5 + (window.innerWidth - 215 - 100 - 5)/(hand1.length - 1)*i;
 
@@ -200,4 +210,14 @@ function drawCard2()
             get('deck2').style.backgroundImage = '';
     }
 
+}
+
+function min(a,b)
+{
+    return (a>b)?(b):(a);
+}
+
+function max(a,b)
+{
+    return (a>b)?(a):(b);
 }
